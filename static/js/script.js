@@ -1,16 +1,16 @@
 const API_KEY = "API_KEY_GOES_HERE";
+const url = `https://api.harvardartmuseums.org/gallery?apikey=${API_KEY}`;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const url = `https://api.harvardartmuseums.org/gallery?apikey=${API_KEY}`;
-  showGalleries(url);
-});
+const galleries = document.querySelector("#galleries");
+const allObjects = document.querySelector("#all-objects");
+const allGalleries = document.querySelector("#all-galleries");
 
 function showGalleries(url) {
   fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    data.records.forEach(gallery => {
-      document.querySelector("#galleries").innerHTML += `
+  .then((response) => response.json())
+  .then((data) => {
+    data.records.forEach((gallery) => {
+      galleries.innerHTML += `
         <li>
           <a href="#${gallery.id}" onclick="showObjectsTable(${gallery.id})">
             Gallery #${gallery.id}: ${gallery.name} (Floor ${gallery.floor})
@@ -18,6 +18,7 @@ function showGalleries(url) {
         </li>
       `;
     });
+
     if (data.info.next) {
       showGalleries(data.info.next);
     }
@@ -25,6 +26,8 @@ function showGalleries(url) {
 }
 
 function showObjectsTable(id) {
-  document.querySelector("#all-objects").style.display = "block";
-  document.querySelector("#all-galleries").style.display = "none";
+  allObjects.style.display = "block";
+  allGalleries.style.display = "none";
 }
+
+showGalleries(url);
