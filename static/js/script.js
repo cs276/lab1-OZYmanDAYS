@@ -1,4 +1,4 @@
-const API_KEY = "API_KEY_GOES_HERE";
+const API_KEY = "8b42a0c0-d56a-11e9-86e9-6733b6ff9504";
 const url = `https://api.harvardartmuseums.org/gallery?apikey=${API_KEY}`;
 
 const galleries = document.querySelector("#galleries");
@@ -28,6 +28,21 @@ function showGalleries(url) {
 function showObjectsTable(id) {
   allObjects.style.display = "block";
   allGalleries.style.display = "none";
+  fetch(url)
+  .then((response) => response.json())
+  .then((data) => {
+    data.records.forEach((gallery) => {
+      if (gallery.id == id)
+      {
+        //display ByteLengthQueuingStrategy
+        break;
+      }
+    });
+
+    if (data.info.next) {
+      showGalleries(data.info.next);
+    }
+  })
 }
 
 showGalleries(url);
