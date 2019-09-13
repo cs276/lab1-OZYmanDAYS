@@ -7,6 +7,8 @@ const allGalleries = document.querySelector("#all-galleries");
 const objects = document.querySelector("#objects");
 
 function showGalleries(url) {
+  allObjects.style.display = "none";
+  allGalleries.style.display = "block";
   fetch(url)
   .then((response) => response.json())
   .then((data) => {
