@@ -46,4 +46,9 @@ function showObjectsTable(id) {
   });
 }
 
+function viewObject(objectId) {
+  //fetch object info
+  //display it in div with id "object-view"
+}
+
 showGalleries(url);
