@@ -6,6 +6,17 @@ const allObjects = document.querySelector("#all-objects");
 const allGalleries = document.querySelector("#all-galleries");
 const objects = document.querySelector("#objects");
 
+window.onload = function() {
+  let hash = (window.location.hash).replace('#', '');
+  if (hash.length == 0) {
+      showGalleries(url);
+  }
+  else {
+      //else do something with hash
+      showObjectsTable(hash);
+  }
+}
+
 function showGalleries(url) {
   allObjects.style.display = "none";
   allGalleries.style.display = "block";
@@ -53,4 +64,9 @@ function viewObject(objectId) {
   //display it in div with id "object-view"
 }
 
-showGalleries(url);
+function goBack() {
+  showGalleries(url);
+  window.location.href = window.location.href.split('#')[0];
+}
+
+//showGalleries(url);
