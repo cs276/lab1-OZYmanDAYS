@@ -4,6 +4,7 @@ const url = `https://api.harvardartmuseums.org/gallery?apikey=${API_KEY}`;
 const galleries = document.querySelector("#galleries");
 const allObjects = document.querySelector("#all-objects");
 const allGalleries = document.querySelector("#all-galleries");
+const objects = document.querySelector("#objects");
 
 function showGalleries(url) {
   fetch(url)
@@ -28,21 +29,21 @@ function showGalleries(url) {
 function showObjectsTable(id) {
   allObjects.style.display = "block";
   allGalleries.style.display = "none";
-  fetch(url)
+  fetch(`https://api.harvardartmuseums.org/object?apikey=${API_KEY}&gallery=${id}`)
   .then((response) => response.json())
   .then((data) => {
-    data.records.forEach((gallery) => {
-      if (gallery.id == id)
-      {
-        //display ByteLengthQueuingStrategy
-        break;
-      }
+    data.records.forEach((object) => {
+      console.log("lol");
+      objects.innerHTML += `
+      <tr>
+        <td>${object.title}</td>
+        <td><img src=${object.primaryimageurl} width=50px height=60px></td>
+        <td>${object.people.map(x => x.name)}</td>
+        <td><a href="${object.url}">Click to visit page</a></td>
+      </tr>
+    `;
     });
-
-    if (data.info.next) {
-      showGalleries(data.info.next);
-    }
-  })
+  });
 }
 
 showGalleries(url);
