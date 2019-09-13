@@ -39,7 +39,7 @@ function showObjectsTable(id) {
         <td>${object.title}</td>
         <td><img src=${object.primaryimageurl} width=50px height=60px></td>
         <td>${object.people.map(x => x.name)}</td>
-        <td><a href="${object.url}">Click to visit page</a></td>
+        <td><a href="${object.url}" target="_blank">Click to visit page</a></td>
       </tr>
     `;
     });
