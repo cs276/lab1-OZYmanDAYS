@@ -71,7 +71,7 @@ function showObjectsTable(id) {
       console.log(object.objectnumber);
       objects.innerHTML += `
       <tr>
-        <td><a href="#${object.objectnumber}" onclick="showObjectInfo(${object.objectnumber})">${object.title}</a></td>
+        <td><a href="#${object.objectnumber}" onclick="showObjectInfo('${object.objectnumber}');">${object.title}</a></td>
         <td><img src=${object.primaryimageurl} width=50px height=60px></td>
         <td>${object.people ? object.people.map(x => x.name) : "Unknown"}</td>
         <td><a href="${object.url}" target="_blank">Click to visit page</a></td>
