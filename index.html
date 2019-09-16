@@ -8,6 +8,22 @@
         <h1 class="title">Harvard Art Museums</h1>
         <div id="all-galleries">
             <h2>Galleries</h2>
+            <form id="floorForm">
+                <fieldset>
+                    <legend>Selecting elements</legend>
+                    <p>
+                        <label>Select list</label>
+                        <select id = "floorList">
+                            <option value = "all">All Floors</option>
+                            <option value = "1">Floor 1</option>
+                            <option value = "2">Floor 2</option>
+                            <option value = "3">Floor 3</option>
+                            <option value = "4">Floor 4</option>
+                        </select>
+                        <input type="button" onclick="showGalleryFloor('https://api.harvardartmuseums.org/gallery?apikey=8b42a0c0-d56a-11e9-86e9-6733b6ff9504'); clearHtml()">
+                    </p>
+                </fieldset>
+            </form>
             <ul id="galleries">
             </ul>
         </div>

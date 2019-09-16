@@ -9,13 +9,14 @@ const objectview = document.querySelector("#object-view")
 const objectinfo = document.querySelector("#objectinfo")
 const button1 = document.querySelector("#objecttablebackbutton")
 const button2 = document.querySelector("#objectviewbackbutton")
+const floorOption = document.querySelector("#floorList")
 
 
 
 function plsLoad() {
   let hash = (window.location.hash).replace('#', '');
   if (hash.length == 0) {
-      showGalleries(url);
+      showGalleries(url, 0);
   }
 }
 
@@ -57,7 +58,41 @@ function showGalleries(url) {
     if (data.info.next) {
       showGalleries(data.info.next);
     }
-  })
+  });
+}
+
+function showGalleryFloor(url) {
+  allObjects.style.display = "none";
+  allGalleries.style.display = "block";
+  objectview.style.display = "none";
+  let e = document.getElementById("floorList");
+  let floor = e.options[e.selectedIndex].value;
+  fetch(url)
+  .then((response) => response.json())
+  .then((data) => {
+    data.records.forEach((gallery) => {
+      console.log(floor);
+      if(floor == "all" || gallery.floor == floor) {
+      console.log(gallery.floor);
+      console.log(floor);
+      galleries.innerHTML += `
+        <li>
+          <a href="#${gallery.id}" onclick="showObjectsTable(${gallery.id})">
+            Gallery #${gallery.id}: ${gallery.name} (Floor ${gallery.floor})
+          </a>
+        </li>
+      `;
+      }
+    });
+
+    if (data.info.next) {
+      showGalleryFloor(data.info.next);
+    }
+  });
+}
+
+function clearHtml() {
+  galleries.innerHTML = "";
 }
 
 function showObjectsTable(id) {
@@ -68,7 +103,6 @@ function showObjectsTable(id) {
   .then((response) => response.json())
   .then((data) => {
     data.records.forEach((object) => {
-      console.log(object.objectnumber);
       objects.innerHTML += `
       <tr>
         <td><a href="#${object.objectnumber}" onclick="showObjectInfo('${object.objectnumber}');">${object.title}</a></td>
