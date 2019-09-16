@@ -12,7 +12,7 @@
                 <fieldset>
                     <legend>Selecting elements</legend>
                     <p>
-                        <label>Select list</label>
+                        <label>Which floor would you like to view?</label>
                         <select id = "floorList">
                             <option value = "all">All Floors</option>
                             <option value = "1">Floor 1</option>
@@ -20,7 +20,7 @@
                             <option value = "3">Floor 3</option>
                             <option value = "4">Floor 4</option>
                         </select>
-                        <input type="button" onclick="showGalleryFloor('https://api.harvardartmuseums.org/gallery?apikey=8b42a0c0-d56a-11e9-86e9-6733b6ff9504'); clearHtml()">
+                        <input type="button" value="Filter" onclick="showGalleryFloor('https://api.harvardartmuseums.org/gallery?apikey=8b42a0c0-d56a-11e9-86e9-6733b6ff9504'); clearHtml()">
                     </p>
                 </fieldset>
             </form>
