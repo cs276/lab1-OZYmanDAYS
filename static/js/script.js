@@ -5,38 +5,21 @@ const galleries = document.querySelector("#galleries");
 const allObjects = document.querySelector("#all-objects");
 const allGalleries = document.querySelector("#all-galleries");
 const objects = document.querySelector("#objects");
-const objectview = document.querySelector("#object-view")
-const objectinfo = document.querySelector("#objectinfo")
-const button1 = document.querySelector("#objecttablebackbutton")
-const button2 = document.querySelector("#objectviewbackbutton")
-const floorOption = document.querySelector("#floorList")
+const objectview = document.querySelector("#object-view");
+const objectinfo = document.querySelector("#objectinfo");
+const button = document.querySelector("#gobackbutton");
+const button1 = document.querySelector("#objecttablebackbutton");
+const button2 = document.querySelector("#objectviewbackbutton");
+const floorOption = document.querySelector("#floorList");
 
-
-
-function plsLoad() {
+function load() {
   let hash = (window.location.hash).replace('#', '');
   if (hash.length == 0) {
-      showGalleries(url, 0);
+      showGalleries(url);
   }
 }
 
-window.onload = plsLoad;
-//window.onhashchange = plsLoad;
-
-/**let enterPressed = 0;
-window.onkeydown = function (e) {
-  let keyCode = e.keyCode || e.which;
-  if (keyCode === 13) { 
-    if (enterPressed === 0) {
-      enterPressed = 1;
-      e.preventDefault(); 
-      console.log("Enter pressed once. enterPressed is " + enterPressed);
-    } else if (enterPressed === 1) {
-      e.preventDefault(); 
-      console.log("Enter pressed twice. enterPressed is " + enterPressed);
-    }
-   }
- };**/
+window.onload = load;
 
 function showGalleries(url) {
   allObjects.style.display = "none";
@@ -47,7 +30,7 @@ function showGalleries(url) {
   .then((data) => {
     data.records.forEach((gallery) => {
       galleries.innerHTML += `
-        <li>
+        <li class="list-group-item">
           <a href="#${gallery.id}" onclick="showObjectsTable(${gallery.id})">
             Gallery #${gallery.id}: ${gallery.name} (Floor ${gallery.floor})
           </a>
@@ -58,7 +41,7 @@ function showGalleries(url) {
     if (data.info.next) {
       showGalleries(data.info.next);
     }
-  });
+  })
 }
 
 function showGalleryFloor(url) {
@@ -71,16 +54,13 @@ function showGalleryFloor(url) {
   .then((response) => response.json())
   .then((data) => {
     data.records.forEach((gallery) => {
-      console.log(floor);
       if(floor == "all" || gallery.floor == floor) {
-      console.log(gallery.floor);
-      console.log(floor);
       galleries.innerHTML += `
-        <li>
-          <a href="#${gallery.id}" onclick="showObjectsTable(${gallery.id})">
-            Gallery #${gallery.id}: ${gallery.name} (Floor ${gallery.floor})
-          </a>
-        </li>
+      <li class="list-group-item">
+        <a href="#${gallery.id}" onclick="showObjectsTable(${gallery.id})">
+          Gallery #${gallery.id}: ${gallery.name} (Floor ${gallery.floor})
+        </a>
+      </li>
       `;
       }
     });
@@ -105,14 +85,14 @@ function showObjectsTable(id) {
     data.records.forEach((object) => {
       objects.innerHTML += `
       <tr>
-        <td><a href="#${object.objectnumber}" onclick="showObjectInfo('${object.objectnumber}');">${object.title}</a></td>
-        <td><img src=${object.primaryimageurl} width=50px height=60px></td>
-        <td>${object.people ? object.people.map(x => x.name) : "Unknown"}</td>
+      <td><a href="#${object.objectnumber}" onclick="showObjectInfo('${object.objectnumber}');">${object.title}</a></td>
+        <td><img src=${object.primaryimageurl}></td>
+        <td>${object.people ? object.people.map(x => x.name): "Unknown"}</td>
         <td><a href="${object.url}" target="_blank">Click to visit page</a></td>
       </tr>
     `;
     });
-    button1.innerHTML += `<input type="button" value="Go Back" onclick="window.location.href='index.html'">`
+    button1.innerHTML += `<input type="button" class = "btn btn-outline-success ml-3" value="Go Back" onclick="window.location.href='index.html'">`
   });
 }
 
@@ -130,18 +110,11 @@ function showObjectInfo(id) {
         <td>${info.description}</td>
         <td>${info.provenance}</td>
         <td>${info.accessionyear}</td>
-        <td><img src=${info.primaryimageurl} width=50px height=60px></td>
+        <td><img src=${info.primaryimageurl}></td>
       </tr>
     `;
     });
-    button2.innerHTML += `<input type="button" value="Go Back" onclick="window.location.href='index.html'">`;
+    button2.innerHTML += `<input type="button" class = "btn btn-outline-success ml-3" value="Go Back" onclick="window.location.href='index.html'">`
   });
 }
 
-
-// function goBack() {
-//   showGalleries(url));
-//   window.location.href = window.location.href.split('#')[0];
-// }
-
-//showGalleries(url);
