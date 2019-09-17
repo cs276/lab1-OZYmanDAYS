@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Harvard Art Museums Galleries</title>
+        <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity = "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin = "anonymous">
         <link href="static/css/styles.css" rel="stylesheet" />
     </head>
     <body>
@@ -10,7 +11,6 @@
             <h2>Galleries</h2>
             <form id="floorForm">
                 <fieldset>
-                    <legend>Selecting elements</legend>
                     <p>
                         <label>Which floor would you like to view?</label>
                         <select id = "floorList">
@@ -20,21 +20,22 @@
                             <option value = "3">Floor 3</option>
                             <option value = "4">Floor 4</option>
                         </select>
-                        <input type="button" value="Filter" onclick="showGalleryFloor('https://api.harvardartmuseums.org/gallery?apikey=8b42a0c0-d56a-11e9-86e9-6733b6ff9504'); clearHtml()">
+                        <input type="button" class="btn btn-secondary" value="Filter" onclick="showGalleryFloor('https://api.harvardartmuseums.org/gallery?apikey=8b42a0c0-d56a-11e9-86e9-6733b6ff9504'); clearHtml()">
                     </p>
                 </fieldset>
             </form>
-            <ul id="galleries">
+            <ul id="galleries" class="list-group"></ul>
             </ul>
         </div>
         <div id="all-objects">
             <h2>Objects</h2>
-            <table id="objects">
+            <table id="objects" class="table table-hover table-bordered">
                 <tr>
-                    <th><b>Title</b></th>
-                    <th><b>Image</b></th>
-                    <th><b>People</b></th>
-                    <th><b>Link</b></th>
+                    <thead class="thead-light">
+                    <th scope="col"><b>Title</b></th>
+                    <th scope="col"><b>Image</b></th>
+                    <th scope="col"><b>People</b></th>
+                    <th scope="col"><b>Link</b></th>
                 </tr>
             </table>
             <form id="objecttablebackbutton">
@@ -42,13 +43,14 @@
         </div>
         <div id="object-view">
             <h2>Object Information</h2>
-            <table id="objectinfo">
+            <table id="objectinfo" class="table table-hover table-bordered">
                 <tr>
-                    <th><b>Title</b></th>
-                    <th><b>Description</b></th>
-                    <th><b>Provenance</b></th>
-                    <th><b>Accession Year</b></th>
-                    <th><b>Image</b></th>
+                    <thead class="thead-light">
+                    <th scope="col"><b>Title</b></th>
+                    <th scope="col"><b>Description</b></th>
+                    <th scope="col"><b>Provenance</b></th>
+                    <th scope="col"><b>Accession Year</b></th>
+                    <th scope="col"><b>Image</b></th>
                 </tr>
             </table>
             <form id="objectviewbackbutton">
